@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const prefix = '!';
-const token = 'NzA1OTA3NjQ2NDgxNDMyNjA4.Xq3f5Q.weO3y6l7VMf4VMqrpIYVg_Cmsz0';
+const token = 'NzA1OTA3NjQ2NDgxNDMyNjA4.Xq32Kg.XBSLuMox9fiYO2-MCSPbBNwLJBg';
 const r = "RANDOM";
  
 bot.on('ready', () => {
     console.log(`${bot.user.tag} successfully logged in!`)
-    bot.user.setActivity('!help', ({type: "LISTENING"}))
+    bot.user.setActivity('the commands', ({type: "LISTENING"}))
 })
  
 bot.on('message', message => {
