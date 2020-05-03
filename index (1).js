@@ -17,6 +17,7 @@ bot.on('message', message => {
     let user = message.mentions.users.first();
  	if (msg.member.hasPermission("ADMINISTRATOR")) {
  		if(command === 'kick') {
+ 			if(!msg.member.hasPermission("KICK_MEMBERS")) throw Error('no kick permissions')
  			if (user) {
  			// Now we get the member from the user
  			const member = message.guild.member(user);
@@ -29,25 +30,26 @@ bot.on('message', message => {
 	 			*/
 	 			member.kick('Optional reason that will display in the audit logs').then(() => {
 	 				// We let the message author know we were able to kick the person
-	 				message.reply(`Successfully kicked ${user.tag}`);
+	 				msg.channel.send(`Successfully kicked ${user.tag}`);
 	          	}).catch(err => {
 		            // An error happened
 		            // This is generally due to the bot not being able to kick the member,
 		            // either due to missing permissions or role hierarchy
-		            message.reply('I was unable to kick the member');
+		            msg.channel.send('I was unable to kick the member');
 		            // Log the error
 		            console.error(err);
 	          	});
          	} else {
 	          	// The mentioned user isn't in this guild
-	        	message.reply("That user isn't in this guild!");
+	        	msg.channel.send("That user isn't in this guild!");
         	}
 	      // Otherwise, if no user was mentioned
 	    } else {
-	    		message.reply("You didn't mention the user to kick!");
+	    		msg.channel.send("You didn't mention the user to kick!");
 	    	}
 	    }
 	    if(command === "ban") {
+	    	if(!msg.member.hasPermission("BAN_MEMBERS")) throw Error('no ban permissions')
 	    	const user = message.mentions.users.first();
 		    // If we have a user mentioned
 		    if (user) {
@@ -66,25 +68,25 @@ bot.on('message', message => {
 			         	reason: 'They were bad!',
 			         }).then(() => {
 		            	// We let the message author know we were able to ban the person
-		            	message.reply(`Successfully banned ${user.tag}`);
+		            	msg.channel.send(`Successfully banned ${user.tag}`);
 		          	}).catch(err => {
 			            // An error happened
 			            // This is generally due to the bot not being able to ban the member,
 			            // either due to missing permissions or role hierarchy
-			            message.reply('I was unable to ban the member');
+			            msg.channel.send('I was unable to ban the member');
 			            // Log the error
 			            console.error(err);
 		          	});
 		      	} else {
 			        // The mentioned user isn't in this guild
-			        message.reply("That user isn't in this guild!");
+			        msg.channel.send("That user isn't in this guild!");
 		      	}
 		      } else {
 		      	// Otherwise, if no user was mentioned
-		      	message.reply("You didn't mention the user to ban!");
+		      	msg.channel.send("You didn't mention the user to ban!");
 		      }
 		  }
- 	}
+ 	} else throw Error('bruh give admin to this bot or wont work!');
     if (command === 'help') {
         const embed = new Discord.MessageEmbed()
         .setTitle('Commands')
