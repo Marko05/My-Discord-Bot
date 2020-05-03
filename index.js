@@ -18,7 +18,7 @@ bot.on('message', message => {
     if (command === 'help') {
         const embed = new Discord.MessageEmbed()
         .setTitle('Commands')
-        .addField('General', `${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>`)
+        .addField('General', `**${prefix}help - Shows this message.**\n**${prefix}random - Shows a random number from <Args> to <args 2>**`)
         .setColor(0xff0000);
         msg.channel.send(embed);
     }
