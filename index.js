@@ -6,7 +6,7 @@ const r = "RANDOM";
  
 bot.on('ready', () => {
     console.log(`${bot.user.tag} successfully logged in!`)
-    bot.user.setActivity('the commands', ({type: "LISTENING"}))
+    bot.user.setActivity('*help', ({type: "PLAYING"}))
 })
  
 bot.on('message', message => {
