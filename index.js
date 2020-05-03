@@ -18,14 +18,14 @@ bot.on('message', message => {
     if (command === 'help') {
         const embed = new Discord.MessageEmbed()
         .setTitle('Commands')
-        .addField('General', `${prefix}**help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>**`)
+        .addField(`${prefix}**help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>**`)
         .setColor(0xff0000);
         msg.channel.send(embed);
     }
     if (command === 'random') {
         if(!args[0]) return msg.reply("You didn't specify args 1")
         if(!args[1]) return msg.reply("You didn't specify args 2")
-        msg.channel.send("Your random number is: " + Math.floor(Math.random() * args[1] + args[0]));
+        msg.channel.send("Your random number is:" + Math.floor(Math.random() * args[1] + args[0]));
     }
     if (cmd === 'clear' || cmd === 'purge'){
         if(!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send("You can't use this command!");
