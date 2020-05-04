@@ -30,7 +30,7 @@ bot.on('message', message => {
 	 			*/
 	 			member.kick('Optional reason that will display in the audit logs').then(() => {
 	 				// We let the message author know we were able to kick the person
-	 				msg.channel.send(`Successfully kicked ${user.tag}`);
+	 				msg.channel.send(`Successfully kicked **${user.tag}**`);
 	          	}).catch(err => {
 		            // An error happened
 		            // This is generally due to the bot not being able to kick the member,
@@ -41,15 +41,15 @@ bot.on('message', message => {
 	          	});
          	} else {
 	          	// The mentioned user isn't in this guild
-	        	msg.channel.send("That user isn't in this guild!");
+	        	msg.channel.send("**That user isn't in this guild!**");
         	}
 	      // Otherwise, if no user was mentioned
 	    } else {
-	    		msg.channel.send("You didn't mention the user to kick!");
+	    		msg.channel.send("**You didn't mention the user to kick!**");
 	    	}
 	    }
 	    if(command === "ban") {
-	    	if(!msg.member.hasPermission("BAN_MEMBERS")) throw Error('no ban permissions')
+	    	if(!msg.member.hasPermission("BAN_MEMBERS")) throw Error('**You have no permissions!**')
 	    	const user = message.mentions.users.first();
 		    // If we have a user mentioned
 		    if (user) {
@@ -68,7 +68,7 @@ bot.on('message', message => {
 			         	reason: 'They were bad!',
 			         }).then(() => {
 		            	// We let the message author know we were able to ban the person
-		            	msg.channel.send(`Successfully banned ${user.tag}`);
+		            	msg.channel.send(`Successfully banned **${user.tag}**`);
 		          	}).catch(err => {
 			            // An error happened
 			            // This is generally due to the bot not being able to ban the member,
@@ -83,7 +83,7 @@ bot.on('message', message => {
 		      	}
 		      } else {
 		      	// Otherwise, if no user was mentioned
-		      	msg.channel.send("You didn't mention the user to ban!");
+		      	msg.channel.send("**You didn't mention the user to ban!**");
 		      }
 		  }
  	} else throw Error('bruh give admin to this bot or wont work!');
