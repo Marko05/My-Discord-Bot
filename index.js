@@ -30,7 +30,7 @@ bot.on('message', message => {
 	 			*/
 	 			member.kick('Optional reason that will display in the audit logs').then(() => {
 	 				// We let the message author know we were able to kick the person
-	 				msg.channel.send(`Successfully kicked **${user.tag}**`);
+	 				msg.channel.send(`**${user.tag}** has been kicked`);
 	          	}).catch(err => {
 		            // An error happened
 		            // This is generally due to the bot not being able to kick the member,
