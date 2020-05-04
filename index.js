@@ -68,7 +68,7 @@ bot.on('message', message => {
 			         	reason: 'They were bad!',
 			         }).then(() => {
 		            	// We let the message author know we were able to ban the person
-		            	msg.channel.send(`Successfully banned **${user.tag}**`);
+		            	msg.channel.send(`**${user.tag}** has been banned`);
 		          	}).catch(err => {
 			            // An error happened
 			            // This is generally due to the bot not being able to ban the member,
