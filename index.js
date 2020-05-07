@@ -35,12 +35,12 @@ bot.on('message', message => {
         msg.channel.send(`Successfully deleted \`${args[0]} messages\``).then(m => m.delete({ timeout: 5000 }));
     }
     if(cmd === 'kick'){
-        if(!msg.member.hasPermission('KICK_MEMBERS')) return msg.channel.send("You don't have permission to kick members.");
+        if(!msg.member.hasPermission('KICK_MEMBERS')) return msg.channel.send("**You don't have permission to kick members.**");
         let toKick = msg.mentions.members.first();
         let reason = args.slice(1).join(" ");
-        if(!args[0]) return msg.channel.send('Please mention someone to kick');
-        if(!toKick) return msg.channel.send(`${args[0]} is not a member.`);
-        if(!reason) return msg.channel.send('Specify a reason.');
+        if(!args[0]) return msg.channel.send('**Please mention someone to kick**');
+        if(!toKick) return msg.channel.send(`**${args[0]} is not a member.**`);
+        if(!reason) return msg.channel.send('**Specify a reason.**');
  
         if(!toKick.kickable){
             return msg.channel.send(':x: I cannot kick someone that is mod/admin. :x:');
@@ -60,12 +60,12 @@ bot.on('message', message => {
         }
     }
     if(cmd === 'ban'){
-        if(!msg.member.hasPermission("BAN_MEMBERS")) return msg.channel.send("You don't have permission to ban members.");
+        if(!msg.member.hasPermission("BAN_MEMBERS")) return msg.channel.send("**You don't have permission to ban members.**");
         let toBan = msg.mentions.members.first();
         let reason = args.slice(1).join(" ");
-        if(!args[0]) return msg.channel.send('Please mention someone to bann');
-        if(!toBan) return msg.channel.send(`${args[0]} is not a member.`);
-        if(!reason) return msg.channel.send('Specify a reason.');
+        if(!args[0]) return msg.channel.send('**Please mention someone to ban**');
+        if(!toBan) return msg.channel.send(`**${args[0]} is not a member.**`);
+        if(!reason) return msg.channel.send('**Specify a reason.**');
  
         if(!toBan.bannable){
             return msg.channel.send(':x: I cannot ban someone that is mod/admin. :x:');
