@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const prefix = '*';
-const token = 'NzA1OTA3NjQ2NDgxNDMyNjA4.Xq75Cg.o5eQiLENg4BM6XgLzoIjPQA53TA';
+const prefix = '!';
+const token = `NzA1OTA3NjQ2NDgxNDMyNjA4.XrQZwA.G9lawU5iFv0lOivCdVbZjU4g-Ps`
 const r = "RANDOM";
  
 bot.on('ready', () => {
     console.log(`${bot.user.tag} successfully logged in!`)
-    bot.user.setActivity('*help', ({type: "PLAYING"}))
+    bot.user.setActivity('the commands', ({type: "LISTENING"}))
 })
  
 bot.on('message', message => {
@@ -14,83 +14,11 @@ bot.on('message', message => {
     let args = msg.content.slice(prefix.length).split(/ +/);
     let command = args.shift().toLowerCase();
     let cmd = command;
-    let user = message.mentions.users.first();
- 	if (msg.member.hasPermission("ADMINISTRATOR")) {
- 		if(command === 'kick') {
- 			if(!msg.member.hasPermission("KICK_MEMBERS")) throw Error('no kick permissions')
- 			if (user) {
- 			// Now we get the member from the user
- 			const member = message.guild.member(user);
- 			// If the member is in the guild
- 			if (member) {
-	 			/**
-	 			  * Kick the member
-	 			  * Make sure you run this on a member, not a user!
-	 			  * There are big differences between a user and a member
-	 			*/
-	 			member.kick('Optional reason that will display in the audit logs').then(() => {
-	 				// We let the message author know we were able to kick the person
-	 				msg.channel.send(`**${user.tag}** has been kicked`);
-	          	}).catch(err => {
-		            // An error happened
-		            // This is generally due to the bot not being able to kick the member,
-		            // either due to missing permissions or role hierarchy
-		            msg.channel.send('I was unable to kick the member');
-		            // Log the error
-		            console.error(err);
-	          	});
-         	} else {
-	          	// The mentioned user isn't in this guild
-	        	msg.channel.send("**That user isn't in this guild!**");
-        	}
-	      // Otherwise, if no user was mentioned
-	    } else {
-	    		msg.channel.send("**You didn't mention the user to kick!**");
-	    	}
-	    }
-	    if(command === "ban") {
-	    	if(!msg.member.hasPermission("BAN_MEMBERS")) throw Error('**You have no permissions!**')
-	    	const user = message.mentions.users.first();
-		    // If we have a user mentioned
-		    if (user) {
-		    	// Now we get the member from the user
-		    	const member = message.guild.member(user);
-		      	// If the member is in the guild
-		     	if (member) {
-			     	/**
-			         * Ban the member
-			         * Make sure you run this on a member, not a user!
-			         * There are big differences between a user and a member
-			         * Read more about what ban options there are over at
-			         * https://discord.js.org/#/docs/main/master/class/GuildMember?scrollTo=ban
-			         */
-			         member.ban({
-			         	reason: 'They were bad!',
-			         }).then(() => {
-		            	// We let the message author know we were able to ban the person
-		            	msg.channel.send(`**${user.tag}** has been banned`);
-		          	}).catch(err => {
-			            // An error happened
-			            // This is generally due to the bot not being able to ban the member,
-			            // either due to missing permissions or role hierarchy
-			            msg.channel.send('I was unable to ban the member');
-			            // Log the error
-			            console.error(err);
-		          	});
-		      	} else {
-			        // The mentioned user isn't in this guild
-			        msg.channel.send("That user isn't in this guild!");
-		      	}
-		      } else {
-		      	// Otherwise, if no user was mentioned
-		      	msg.channel.send("**You didn't mention the user to ban!**");
-		      }
-		  }
- 	} else throw Error('bruh give admin to this bot or wont work!');
+ 
     if (command === 'help') {
         const embed = new Discord.MessageEmbed()
         .setTitle('Commands')
-        .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>**`)
+        .addField('General', `${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>`)
         .setColor(0xff0000);
         msg.channel.send(embed);
     }
@@ -105,6 +33,56 @@ bot.on('message', message => {
         msg.delete();
         msg.channel.bulkDelete(args[0]).catch(e => { msg.channel.send("You can only delete 100 messages at once.")});
         msg.channel.send(`Successfully deleted \`${args[0]} messages\``).then(m => m.delete({ timeout: 5000 }));
+    }
+    if(cmd === 'kick'){
+        if(!msg.member.hasPermission('KICK_MEMBERS')) return msg.channel.send("You don't have permission to kick members.");
+        let toKick = msg.mentions.members.first();
+        let reason = args.slice(1).join(" ");
+        if(!args[0]) return msg.channel.send('Please mention someone to kick');
+        if(!toKick) return msg.channel.send(`${args[0]} is not a member.`);
+        if(!reason) return msg.channel.send('Specify a reason.');
+ 
+        if(!toKick.kickable){
+            return msg.channel.send(':x: I cannot kick someone that is mod/admin. :x:');
+        }
+ 
+        if(toKick.kickable){
+            let x = new Discord.MessageEmbed()
+            .setTitle('Kick')
+            .addField('Member Kicked', toKick)
+            .addField('Kicked by', msg.author)
+            .addField('Reason', reason)
+            .addField('Date', msg.createdAt)
+            .setColor(r);
+ 
+            msg.channel.send(x);
+            toKick.kick();
+        }
+    }
+    if(cmd === 'ban'){
+        if(!msg.member.hasPermission("BAN_MEMBERS")) return msg.channel.send("You don't have permission to ban members.");
+        let toBan = msg.mentions.members.first();
+        let reason = args.slice(1).join(" ");
+        if(!args[0]) return msg.channel.send('Please mention someone to bann');
+        if(!toBan) return msg.channel.send(`${args[0]} is not a member.`);
+        if(!reason) return msg.channel.send('Specify a reason.');
+ 
+        if(!toBan.bannable){
+            return msg.channel.send(':x: I cannot ban someone that is mod/admin. :x:');
+        }
+ 
+        if(toBan.bannable){
+            let x = new Discord.MessageEmbed()
+            .setTitle('Ban')
+            .addField('Member Banned', toBan)
+            .addField('Banned by', msg.author)
+            .addField('Reason', reason)
+            .addField('Date', msg.createdAt)
+            .setColor(r);
+ 
+            msg.channel.send(x);
+            toBan.ban();
+        }
     }
 })
  
