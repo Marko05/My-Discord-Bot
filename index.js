@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const prefix = '!';
+const prefix = '*';
 const token = `NzA1OTA3NjQ2NDgxNDMyNjA4.XrQZwA.G9lawU5iFv0lOivCdVbZjU4g-Ps`
 const r = "RANDOM";
  
@@ -85,8 +85,8 @@ bot.on('message', message => {
         }
     }
     if(cmd === 'warn'){
-        if(!user) return message.channel.send(`You did not mention a user!`)
-        if(!args.slice(1).join(" ")) return message.channel.send(`You did not specify a reason!`)
+        if(user) return message.channel.send(`You did not mention a user!`)
+        if(args.slice(1).join(" ")) return message.channel.send(`You did not specify a reason!`)
         warns.findOne({ Guild: message.guild.id, User: user.id },async(err, data)=>{
             if(err) console.log(err)
             if(!data){
