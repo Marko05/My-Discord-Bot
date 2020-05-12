@@ -43,7 +43,7 @@ bot.on('message', message => {
         if(!reason) return msg.channel.send('**Specify a reason.**');
  
         if(!toKick.kickable){
-            return msg.channel.send(':x: I cannot kick someone that is mod/admin. :x:');
+            return msg.channel.send('**:x: I cant kick someone that is Mod/Admin** ');
         }
  
         if(toKick.kickable){
