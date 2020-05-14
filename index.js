@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const prefix = '*';
-const token = `NzA1OTA3NjQ2NDgxNDMyNjA4.XrQZwA.G9lawU5iFv0lOivCdVbZjU4g-Ps`
+const prefix = '!';
+const token = `NzA1OTA3NjQ2NDgxNDMyNjA4.Xr04lQ.ZEOhSxbeyP2Xce0WVXFMQWt2HNE`;
 const r = "RANDOM";
  
 bot.on('ready', () => {
     console.log(`${bot.user.tag} successfully logged in!`)
-    bot.user.setActivity('*help', ({type: "PLAYING"}))
+    bot.user.setActivity('the commands', ({type: "LISTENING"}))
 })
  
 bot.on('message', message => {
@@ -18,7 +18,7 @@ bot.on('message', message => {
     if (command === 'help') {
         const embed = new Discord.MessageEmbed()
         .setTitle('Commands')
-        .addField('**General**', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>**`)
+        .addField('General', `${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>`)
         .setColor(0xff0000);
         msg.channel.send(embed);
     }
@@ -28,22 +28,22 @@ bot.on('message', message => {
         msg.channel.send("Your random number is: " + Math.floor(Math.random() * args[1] + args[0]));
     }
     if (cmd === 'clear' || cmd === 'purge'){
-        if(!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send("You can't use this command!");
-        if(!args[0]) return msg.channel.send("Specify how many messages you want to delete.");
+        if(!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send("**You can't use this command!**");
+        if(!args[0]) return msg.channel.send("**Specify how many messages you want to delete.**");
         msg.delete();
-        msg.channel.bulkDelete(args[0]).catch(e => { msg.channel.send("You can only delete 100 messages at once.")});
+        msg.channel.bulkDelete(args[0]).catch(e => { msg.channel.send("**You can only delete 100 messages at once.**")});
         msg.channel.send(`Successfully deleted \`${args[0]} messages\``).then(m => m.delete({ timeout: 5000 }));
     }
     if(cmd === 'kick'){
-        if(!msg.member.hasPermission('KICK_MEMBERS')) return msg.channel.send("**You don't have permission to kick members.**");
+        if(!msg.member.hasPermission('KICK_MEMBERS')) return msg.channel.send("**:x: You don't have permission to kick members.**");
         let toKick = msg.mentions.members.first();
         let reason = args.slice(1).join(" ");
         if(!args[0]) return msg.channel.send('**Please mention someone to kick**');
-        if(!toKick) return msg.channel.send(`**${args[0]} is not a member.**`);
+        if(!toKick) return msg.channel.send(`**:grey_exclamation: ${args[0]} is not a member**`);
         if(!reason) return msg.channel.send('**Specify a reason.**');
  
         if(!toKick.kickable){
-            return msg.channel.send('**:x: I cant kick someone that is Mod/Admin** ');
+            return msg.channel.send('**:x: I cannot kick someone that is mod/admin.**');
         }
  
         if(toKick.kickable){
@@ -60,15 +60,15 @@ bot.on('message', message => {
         }
     }
     if(cmd === 'ban'){
-        if(!msg.member.hasPermission("BAN_MEMBERS")) return msg.channel.send("**You don't have permission to ban members.**");
+        if(!msg.member.hasPermission("BAN_MEMBERS")) return msg.channel.send("**:x: You don't have permission to ban members.**");
         let toBan = msg.mentions.members.first();
         let reason = args.slice(1).join(" ");
         if(!args[0]) return msg.channel.send('**Please mention someone to ban**');
-        if(!toBan) return msg.channel.send(`**${args[0]} is not a member.**`);
+        if(!toBan) return msg.channel.send(`**:grey_exclamation: ${args[0]} is not a member.**`);
         if(!reason) return msg.channel.send('**Specify a reason.**');
  
         if(!toBan.bannable){
-            return msg.channel.send(':x: I cannot ban someone that is mod/admin. :x:');
+            return msg.channel.send(':x: I cannot ban someone that is Mod/Admin.');
         }
  
         if(toBan.bannable){
@@ -83,34 +83,6 @@ bot.on('message', message => {
             msg.channel.send(x);
             toBan.ban();
         }
-    }
-    if(cmd === 'warn'){
-        if(user) return message.channel.send(`You did not mention a user!`)
-        if(args.slice(1).join(" ")) return message.channel.send(`You did not specify a reason!`)
-        warns.findOne({ Guild: message.guild.id, User: user.id },async(err, data)=>{
-            if(err) console.log(err)
-            if(!data){
-                let newWarns = new warns({
-                    User: user.id,
-                    Guild: message.guild.id,
-                    Warns:[
-                        {
-                            Moderator: message.author.id,
-                            Reason: args.slice(1).join(" ")
-                        }
-                    ]
-                })
-                newWarns.save()
-                message.channel.send(`${user.tag} has been warned with the reason of ${args.slice(1).join(" ")}. They now have 1 warn.`)
-            }else{
-                data.Warns.unshift({
-                    Moderator: message.author.id,
-                    Reason: args.slice(1).join(" ")
-                })
-                data.save()
-                message.channel.send(`${user.tag} has been warned with the reason of ${args.slice(1).join(" ")}. They know have ${data.Warns.length} warns.`)
-            }
-        })
     }
 })
  
