@@ -38,12 +38,12 @@ bot.on('message', message => {
         if(!msg.member.hasPermission('KICK_MEMBERS')) return msg.channel.send("**:x: You don't have permission to kick members.**");
         let toKick = msg.mentions.members.first();
         let reason = args.slice(1).join(" ");
-        if(!args[0]) return msg.channel.send('**Please mention someone to kick**');
-        if(!toKick) return msg.channel.send(`**:grey_exclamation: ${args[0]} is not a member**`);
+        if(!args[0]) return msg.channel.send('**:exclamation:Please mention someone to kick**');
+        if(!toKick) return msg.channel.send(`**:x:${args[0]} is not a member**`);
         if(!reason) return msg.channel.send('**Specify a reason.**');
  
         if(!toKick.kickable){
-            return msg.channel.send('**:x: I cannot kick someone that is mod/admin.**');
+            return msg.channel.send('**:x: I cannot kick someone that is Mod / Admin.**');
         }
  
         if(toKick.kickable){
@@ -63,12 +63,12 @@ bot.on('message', message => {
         if(!msg.member.hasPermission("BAN_MEMBERS")) return msg.channel.send("**:x: You don't have permission to ban members.**");
         let toBan = msg.mentions.members.first();
         let reason = args.slice(1).join(" ");
-        if(!args[0]) return msg.channel.send('**Please mention someone to ban**');
-        if(!toBan) return msg.channel.send(`**:grey_exclamation: ${args[0]} is not a member.**`);
+        if(!args[0]) return msg.channel.send('**:exclamation:Please mention someone to ban**');
+        if(!toBan) return msg.channel.send(`**:x: ${args[0]} is not a member.**`);
         if(!reason) return msg.channel.send('**Specify a reason.**');
  
         if(!toBan.bannable){
-            return msg.channel.send(':x: I cannot ban someone that is Mod/Admin.');
+            return msg.channel.send(':x: I cannot ban someone that is Mod / Admin.');
         }
  
         if(toBan.bannable){
