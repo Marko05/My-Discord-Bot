@@ -42,7 +42,7 @@ bot.on('message', message => {
         if(!toKick) return msg.channel.send(`**:x:${args[0]} is not a member**`);
         if(!reason) return msg.channel.send('**Specify a reason.**');
  
-        if(toKick.kickable){
+        if(!toKick.kickable){
             return msg.channel.send('**:x: I cannot kick someone that is Mod / Admin.**');
         }
  
