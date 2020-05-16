@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const token = `NzA1OTA3NjQ2NDgxNDMyNjA4.XsAHqA.CkCaTIa-gZq0iXwUFrzAsX8f-Zw`;
 
 client.on("ready", () => {
   console.log('Online.')
@@ -23,5 +24,5 @@ client.on('message', async message => {
   }
 });
 
-client.login(process.NzA1OTA3NjQ2NDgxNDMyNjA4.XsAHqA.CkCaTIa-gZq0iXwUFrzAsX8f-Zw.TOKEN); // Put your token into the .env
+client.login.token // Put your token into the .env
 // Make sure to lock your project. Go to the your name project and click "Make This Project Private"
