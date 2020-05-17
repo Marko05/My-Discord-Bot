@@ -20,7 +20,7 @@ bot.on('message', message => {
     if (command === 'help') {
         const embed = new Discord.MessageEmbed()
         .setTitle('Commands')
-        .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>\n${prefix}server - Shows the name and the amount of Members on the server\n${prefix}user-info - Shows your username and your ID**`)
+        .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>\n${prefix}server - Shows the name and the amount of Members on the server\n${prefix}user-info - Shows your username and your ID\n${prefix}avatar - Shows your avatar**`)
         .setColor(0xff0000);
         msg.channel.send(embed);
     }
@@ -91,6 +91,14 @@ bot.on('message', message => {
     }
     else if (message.content === `${prefix}user-info`) {
         message.channel.send(`Your username: **${message.author.username}**\nYour ID: **${message.author.id}**`);
+    }
+    else if (command === 'avatar') {
+        if (!message.mentions.users.size) {
+            return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`);
+    
+        }
+    
+        // ...
     }
 })
  
