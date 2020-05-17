@@ -20,7 +20,7 @@ bot.on('message', message => {
     if (command === 'help') {
         const embed = new Discord.MessageEmbed()
         .setTitle('Commands')
-        .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>\n${prefix}server - Shows the name of the server**`)
+        .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>\n${prefix}server - Shows the name and the amount of Members on the server\n${prefix}user-info - Shows your username and your ID**`)
         .setColor(0xff0000);
         msg.channel.send(embed);
     }
@@ -87,7 +87,10 @@ bot.on('message', message => {
         }
     }
     else if (message.content === `${prefix}server`) {
-        message.channel.send(`This server's name is: **${message.guild.name}**`);
+        message.channel.send(`Server name: **${message.guild.name}**\nTotal members: **${message.guild.memberCount}**`);
+    }
+    else if (message.content === `${prefix}user-info`) {
+        message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
     }
 })
  
