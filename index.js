@@ -1,8 +1,13 @@
 const Discord = require('discord.js');
-const bot = new Discord.Client();
 const prefix = '*';
 const token = `NzA1OTA3NjQ2NDgxNDMyNjA4.XsGduw.GiONOVLJmEZVhaNQZfJ7kAjcd7I`;
 const r = "RANDOM";
+const bot = new Discord.Client();
+const client = new Discord.Client();
+
+
+
+const queue = new Map();
  
 bot.on('ready', () => {
     console.log(`${bot.user.tag} successfully logged in!`)
@@ -18,7 +23,7 @@ bot.on('message', message => {
     if (command === 'help') {
         const embed = new Discord.MessageEmbed()
         .setTitle('Commands')
-        .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>.\n${prefix}server - Shows the name and the amount of Members on the server.\n${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar - Shows your Avatar.**`)
+        .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>.\n${prefix}server - Shows the name and the amount of Members on the server.\n${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s and Demian´s Youtube Channel.**`)
         .setColor(0xff0000);
         msg.channel.send(embed);
     }
@@ -95,8 +100,26 @@ bot.on('message', message => {
             return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`);
     
         }
+        const avatarList = message.mentions.users.map(user => {
+            return `**${user.username}'s avatar:** <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
+        });
+        message.channel.send(avatarList);
     }
- 
+    else if (command === 'fruits') {
+        message.react('🍎');
+        message.react('🍊');
+        message.react('🍇');
+        message.react('🍉');
+        message.react('🍌');
+        message.react('🍍');
+
+    }
+    else if (command === `youtube`) {
+        return message.channel.send(`**Magg´s Youtube Channel:** https://www.youtube.com/channel/UCHf1Yjz6tH1Kni3jFuBWM3Q?view_as=subscriber\n**Demian´s Youtube Channel:** https://www.youtube.com/channel/UC4JLBKiDHvWbFVvKFVsO0Yg`)
+        
+    }
+    
 });
+
 
 bot.login(token);
