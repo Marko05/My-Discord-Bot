@@ -22,6 +22,8 @@ bot.on('message', message => {
     let command = args.shift().toLowerCase();
     let cmd = command;
  
+    if (!message.content.startsWith(prefix)) return;
+
     if (command === 'help') {
         const embed = new Discord.MessageEmbed()
         .setTitle('Commands')
