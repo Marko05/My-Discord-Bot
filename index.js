@@ -50,7 +50,7 @@ bot.on('message', message => {
         if(!toKick.kickable){
             return msg.channel.send(':x: I cannot kick someone that is mod/admin.');
         }
- 
+
         if(toKick.kickable){
             let x = new Discord.MessageEmbed()
             .setTitle('Kick')
