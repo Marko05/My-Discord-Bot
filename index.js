@@ -1,20 +1,10 @@
 const Discord = require('discord.js');
 const prefix = '*';
+const {MessageEmbed} = require('discord.js');
 const token = `NzA1OTA3NjQ2NDgxNDMyNjA4.XsGduw.GiONOVLJmEZVhaNQZfJ7kAjcd7I`;
 const r = "RANDOM";
 const bot = new Discord.Client();
-const {MessageEmbed} = require('discord.js');
-const api = require("imageapi.js");
 const client = new Discord.Client();
-const { Client, RichEmbed } = require("discord.js");
-var { Util } = require('discord.js');
-const fs = require('fs');
-const util = require("util")
-const ms = require("ms");
-const dateFormat = require('dateformat');//npm i dateformat
-const yt_api_key = "AIzaSyB0mq3QNgtA7gLM-GxzduaZ5bqbC7tJ-2g";
-
-
 const queue = new Map();
 
 
@@ -30,8 +20,6 @@ bot.on('ready', () => {
     console.log(`${bot.user.tag} successfully logged in!`)
     bot.user.setActivity('*help', ({type: "PLAYING"}))
  
-    console.log(`${bot.user.tag} successfully logged in!`)
-
 
 });
 
@@ -47,9 +35,9 @@ bot.on('message', message => {
     if (command === 'help') {
         const embed = new Discord.MessageEmbed()
         .setTitle('Renegade Bot')
-        .setDescription (`Commands`)
+        .setDescription (`**Commands**`)
         .setThumbnail (`https://yt3.ggpht.com/a/AGF-l7-DFNiazt0LkaZXQZ-SWKm7BvooPsXjkgQtMQ=s800-c-k-c0xffffffff-no-rj-mo`)
-        .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>.\n${prefix}server - Shows the name and the amount of Members on the server.\n${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s and Demian´s Youtube Channel.**`)
+        .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>.\n${prefix}server-info - Shows the name and the amount of Members on the server.\n${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s and Demian´s Youtube Channel.**`)
         .setColor(0xff0000)
         .setFooter(`Created by Magg#0001`, `https://media.giphy.com/media/fGGV7FeScq2s/giphy.gif`)
         msg.channel.send(embed);
@@ -115,10 +103,26 @@ bot.on('message', message => {
             msg.channel.send(x);
             toBan.ban();
         }
+    
+         if ( cmd === `server`) {
+           const embed = new MessageEmbed() 
+           .setTitle(`Server Info`)
+           .setAuthor (`${message.guild.name} Info`, message.guild.iconURL)
+           .addField(`Server Name`, `${message.guild.name}`, true)
+           .addField(`Owner´s`, `${message.guild.owner}`, true)
+           .addField(`User´s`, `${message.guild.memberCount}`, true)
+           .addField(`Roles`, `${message.guild.roles.size}`, true)
+           .setColor(0xff0000)
+           .setFooter(`Renegeade Bot`, `https://yt3.ggpht.com/a/AGF-l7-DFNiazt0LkaZXQZ-SWKm7BvooPsXjkgQtMQ=s800-c-k-c0xffffffff-no-rj-mo`)
+        
+           message.channel.send(embed);
+           
+        }
+    
+    
     }
-    else if (message.content === `${prefix}server`) {
-        message.channel.send(`Server name: **${message.guild.name}**\nTotal members: **${message.guild.memberCount}**`);
-    }
+         
+        
     else if (message.content === `${prefix}user-info`) {
         message.channel.send(`Your username: **${message.author.username}**\nYour ID: **${message.author.id}**`);
     }
@@ -126,10 +130,10 @@ bot.on('message', message => {
         if (!message.mentions.users.size) {
             return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`);
     
-        }
+    }
         const avatarList = message.mentions.users.map(user => {
             return `**${user.username}'s avatar:** <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
-        });
+    });
         message.channel.send(avatarList);
     }
     else if (command === 'fruits') {
