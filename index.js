@@ -27,8 +27,19 @@ const queue = new Map();
 
  
 bot.on('ready', () => {
+    var activities = [
+        "*help",
+        "JavaScript",
+        "in the console",
+        "insulting kids",
+    ]
+ 
+    const index = Math.floor(Math.random() * activities.length + 1)
+    setInterval(() => {
+        bot.user.setActivity(activities[index]);
+    }, 7000);
     console.log(`${bot.user.tag} successfully logged in!`)
-    bot.user.setActivity('*help', ({type: "PLAYING"}))
+
 
 });
 
