@@ -6,16 +6,33 @@ const bot = new Discord.Client();
 const {MessageEmbed} = require('discord.js');
 const api = require("imageapi.js");
 const client = new Discord.Client();
-
+const { Client, RichEmbed } = require("discord.js");
+var { Util } = require('discord.js');
+const fs = require('fs');
+const util = require("util")
+const ms = require("ms");
+const dateFormat = require('dateformat');//npm i dateformat
+const yt_api_key = "AIzaSyB0mq3QNgtA7gLM-GxzduaZ5bqbC7tJ-2g";
 
 
 const queue = new Map();
+
+
+
+
+
+
+
+
+
  
 bot.on('ready', () => {
     console.log(`${bot.user.tag} successfully logged in!`)
     bot.user.setActivity('*help', ({type: "PLAYING"}))
-})
- 
+
+});
+
+
 bot.on('message', message => {
     let msg = message;
     let args = msg.content.slice(prefix.length).split(/ +/);
@@ -31,7 +48,7 @@ bot.on('message', message => {
         .setThumbnail (`https://yt3.ggpht.com/a/AGF-l7-DFNiazt0LkaZXQZ-SWKm7BvooPsXjkgQtMQ=s800-c-k-c0xffffffff-no-rj-mo`)
         .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>.\n${prefix}server - Shows the name and the amount of Members on the server.\n${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s and Demian´s Youtube Channel.**`)
         .setColor(0xff0000)
-        .setFooter(`Coded by Magg#0001`, `https://media.giphy.com/media/fGGV7FeScq2s/giphy.gif`)
+        .setFooter(`Created by Magg#0001`, `https://media.giphy.com/media/fGGV7FeScq2s/giphy.gif`)
         msg.channel.send(embed);
     }
     if (command === 'random') {
@@ -125,43 +142,8 @@ bot.on('message', message => {
         return message.channel.send(`**Magg´s Youtube Channel:** https://www.youtube.com/channel/UCHf1Yjz6tH1Kni3jFuBWM3Q?view_as=subscriber\n**Demian´s Youtube Channel:** https://www.youtube.com/channel/UC4JLBKiDHvWbFVvKFVsO0Yg`)
         
     }
-    run: async (client, message, args) => {
-        if (message.deletable) message.delete();
-
-        let rMember = message.mentions.members.first() || message.guild.members.get(args[0]);
-
-        if (!rMember)
-            return message.reply("Couldn't find that person?").then(m => m.delete(5000));
-
-        if (rMember.hasPermission("BAN_MEMBERS") || rMember.user.bot)
-            return message.channel.send("Can't report that member").then(m => m.delete(5000));
-
-        if (!args[1])
-            return message.channel.send("Please provide a reason for the report").then(m => m.delete(5000));
-        
-        const channel = message.guild.channels.find(c => c.name === "reports")
-            
-        if (!channel)
-            return message.channel.send("Couldn't find a `#reports` channel").then(m => m.delete(5000));
-
-        const embed = new RichEmbed()
-            .setColor("#ff0000")
-            .setTimestamp()
-            .setFooter(message.guild.name, message.guild.iconURL)
-            .setAuthor("Reported member", rMember.user.displayAvatarURL)
-            .setDescription(stripIndents`**> Member:** ${rMember} (${rMember.user.id})
-            **> Reported by:** ${message.member}
-            **> Reported in:** ${message.channel}
-            **> Reason:** ${args.slice(1).join(" ")}`);
-
-        return channel.send(embed);
-    }
-    module.exports = (client, member) => {
-        member.send(
-          `Welcome on the server! Please be aware that we won't tolerate troll, spam or harassment. Have fun 😀`
-        )
-      }
-
+    
 });
+
     
 bot.login(token);

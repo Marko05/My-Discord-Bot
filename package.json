@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dateformat": "^3.0.3",
     "discord.js": "^12.2.0",
     "imageapi.js": "^1.0.3",
     "mongoose": "^5.9.14"
