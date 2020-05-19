@@ -37,7 +37,8 @@ bot.on('message', message => {
         .setTitle('Renegade Bot')
         .setDescription (`**Commands**`)
         .setThumbnail (`https://yt3.ggpht.com/a/AGF-l7-DFNiazt0LkaZXQZ-SWKm7BvooPsXjkgQtMQ=s800-c-k-c0xffffffff-no-rj-mo`)
-        .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>.\n${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s and Demian´s Youtube Channel.**`)
+        .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>.\n${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s and Demian´s Youtube Channel.\n${prefix}server-info - Give you some Informations about the Server.**`)
+        .addField(`Administrator`, `**${prefix}ban <user> <reason> - Ban a user from the Discord Server.\n${prefix}kick <user> <reason> - Kick a user from the Discord Server.\n${prefix}clear | purge <amount of messages> - Clears a amount of messages.(Max. 100)**`)
         .setColor(0xff0000)
         .setFooter(`Created by Magg#0001`, `https://media.giphy.com/media/fGGV7FeScq2s/giphy.gif`)
         msg.channel.send(embed);
@@ -140,6 +141,19 @@ bot.on('message', message => {
         return message.channel.send(`**Magg´s Youtube Channel:** https://www.youtube.com/channel/UCHf1Yjz6tH1Kni3jFuBWM3Q?view_as=subscriber\n**Demian´s Youtube Channel:** https://www.youtube.com/channel/UC4JLBKiDHvWbFVvKFVsO0Yg`)
         
     }
+    else if (message.content === `${prefix}server-info`) {
+        let embed = new Discord.MessageEmbed()
+        .setTitle("__Server-Information__")
+        .setColor("0ED4DA")
+        .setThumbnail(`https://th.bing.com/th/id/OIP._hDMcU-MRjBRaTNRuURVmAHaFj?w=224&h=168&c=7&o=5&pid=1.7`)
+        .addField('**Server-Name**', `**${message.guild.name}**`, true)
+        .addField('**Server-Owner:**', `**${message.guild.owner.user.tag}**`, true)
+        .addField("**Member-Count:**", `**${message.guild.memberCount}**`, true)
+        
+      
+        message.channel.send(embed);
+    }
+
     
 });
 
