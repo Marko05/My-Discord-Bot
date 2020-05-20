@@ -3,8 +3,8 @@ const prefix = '*';
 const {MessageEmbed} = require('discord.js');
 const token = `NzA1OTA3NjQ2NDgxNDMyNjA4.XsWbZQ.ko4gDhwJ1RYRtTiKf-exZAswkEg`;
 const r = "RANDOM";
-const bot = new Discord.Client();
 const client = new Discord.Client();
+const bot = new Discord.Client()
 const queue = new Map();
 const api = require(`covidapi`)
 const ms = require (`parse-ms`)
@@ -45,7 +45,7 @@ bot.on('message', message => {
         .setThumbnail (`http://1.bp.blogspot.com/-zHadsvGwqEM/T48RSwyXEII/AAAAAAAAAOk/GrsTqyDwKWM/s1600/Crying-Anime-Girl-anime-girls-7642956-800-600.jpg`)
         .addField(`**Administrator**`, `**${prefix}ban <user> <reason> - Ban a user from the Server.\n${prefix}kick <user> <reason> - Kick a user from the Server.\n${prefix}clear | purge <amount of messages> - Clears a amount of messages.(Max. 100)**`)
         .addField('**Infos**', `**${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s Youtube Channel.\n${prefix}server-info - Give you some Informations about the Server.**`)
-        .addField(`**Fun**`, `**${prefix}random - Shows a random number from 1 to ∞.\n ${prefix}joke - Tells you a joke.\n ${prefix}meme - Shows you a meme.**`)
+        .addField(`**Fun**`, `**${prefix}random - Shows a random number from 1 to ∞.\n ${prefix}joke - Tells you a joke.**`)
         .setColor(0xff0000)
         .setFooter(`Created by Magg#0001`, `https://media.giphy.com/media/fGGV7FeScq2s/giphy.gif`)
         msg.channel.send(embed);
@@ -180,46 +180,10 @@ bot.on('message', message => {
             message.channel.send(joke)
         })
     }
-    bot.on('message', async message => {
-    if (message.content === `*meme`) {
-        const subReddits = [ "meme","dankmemer","memes"]
-        const random = subReddits[Math.floor(Math.random() * subReddits.length)];
 
-        const img = await randomPuppy(random);
-        const embed = new Discord.MessageEmbed()
-        .setColor("RANDOM")
-        .setImage(img)
-        .setTitle(`From r/${random}`)
-        .setURL(`https://reddit.com/r/${random}`);
-        message.channel.send(embed)
-    }
+
 
 });
-bot.on('message', async message => {
-    if (message.content === "*covid all") {
-        api.all().then(console.log)
-
-        const data = await api.all()
-        const coronaembed = new Discord.MessageEmbed()
-        .setColor("ff2050")
-        .setTitle("Global Cases")
-        .setDescription("Number of cases may differ from other sources")
-        .addField("Cases", data.cases, true)
-        .addField("Active", data.active, true)
-        .addField("Cases Today", data.todayCases, true)
-        .addField("Critical Cases", data.critical, true)
-        .addField("Deaths", data.deaths, true)
-        .addField("Recovered", data.recovered, true)
-        message.channel.send(coronaembed)
-    }
-
-});
-
-});
-    
-
-
-
 
 
 bot.login(token);
