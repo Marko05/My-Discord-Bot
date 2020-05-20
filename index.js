@@ -15,7 +15,7 @@ const randomPuppy = require (`random-puppy`)
 
 
 
-client.on('message', async message => {
+
 
 
 
@@ -36,8 +36,8 @@ bot.on('message', message => {
  
     if (!message.content.startsWith(prefix)) return;
 
-});
-    if (command === 'help') {
+
+    if (cmd === 'help') {
         const embed = new Discord.MessageEmbed()
         .setTitle('Aperace')
         .setDescription (`**Commands**`)
@@ -48,15 +48,13 @@ bot.on('message', message => {
         .setFooter(`Created by Magg#0001`, `https://media.giphy.com/media/fGGV7FeScq2s/giphy.gif`)
         msg.channel.send(embed);
     }
-});
-    client.on('message', async message => {
-    if (command === 'random') {
+
+    if (cmd === 'random') {
         if(!args[0]) return msg.reply("**You didn't specify args 1**")
         if(!args[1]) return msg.reply("**You didn't specify args 2**")
         msg.channel.send("Your random number is: " + Math.floor(Math.random() * args[1] + args[0]));
     }
-});
-    client.on('message', async message => {
+
     if (cmd === 'clear' || cmd === 'purge'){
         if(!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send("**:x: You can't use this command!**");
         if(!args[0]) return msg.channel.send("**Specify how many messages you want to delete.**");
@@ -64,8 +62,7 @@ bot.on('message', message => {
         msg.channel.bulkDelete(args[0]).catch(e => { msg.channel.send("You can only delete 100 messages at once.")});
         msg.channel.send(`**:white_check_mark: Successfully deleted \`${args[0]} messages\`**`).then(m => m.delete({ timeout: 5000 }));
     }
-});
-    client.on('message', async message => {
+
     if(cmd === 'kick'){
         if(!msg.member.hasPermission('KICK_MEMBERS')) return msg.channel.send("**:x: You don't have permission to kick members.**");
         let toKick = msg.mentions.members.first();
@@ -91,8 +88,8 @@ bot.on('message', message => {
             toKick.kick();
         }
     }
-});
-    client.on('message', async message => {
+
+
     if(cmd === 'ban'){
         if(!msg.member.hasPermission("BAN_MEMBERS")) return msg.channel.send("**:x: You don't have permission to ban members.**");
         let toBan = msg.mentions.members.first();
@@ -120,9 +117,9 @@ bot.on('message', message => {
     
      
     }
-});
-    client.on('message', async message => {
-    if (command === 'avatar') {
+
+ 
+    if (cmd === 'avatar') {
         if (!message.mentions.users.size) {
             return message.channel.send(`**Your avatar:** <${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`);
         }
@@ -135,11 +132,11 @@ bot.on('message', message => {
         // by default, discord.js will `.join()` the array with `\n`
         message.channel.send(avatarList);
     }
-});
+
     
     
     
-    client.on('message', async message => {
+ 
     if (command === 'fruits') {
         message.react('🍎');
         message.react('🍊');
@@ -149,14 +146,13 @@ bot.on('message', message => {
         message.react('🍍');
 
     }
-});
-    client.on('message', async message => {
+
+    
     if (command === `youtube`) {
         return message.channel.send(`**Magg´s Youtube Channel:** https://www.youtube.com/channel/UCHf1Yjz6tH1Kni3jFuBWM3Q?view_as=subscriber\n**Demian´s Youtube Channel:** https://www.youtube.com/channel/UC4JLBKiDHvWbFVvKFVsO0Yg`)
         
     }
-    });
-    client.on('message', async message => {
+
     if (message.content === `${prefix}server-info`) {
         let embed = new Discord.MessageEmbed()
         .setTitle("__Server-Information__")
@@ -172,23 +168,11 @@ bot.on('message', message => {
     else if (message.content === `${prefix}user-info`) {
 
     }
-    client.on('message', async message => {
-        if (command === `meme`) {
-                const subReddits = ["dankmeme", "meme", "memes"]
-                const random = subReddits[Math.floor(Math.random() * subReddits.length)];
-        
-                let img = await randomPuppy(random);
-                let embed = new Discord.MessageEmbed()
-                .setColor("RANDOM")
-                .setImage(img)
-                .setTitle(`From r/${random}`)
-                .setURL(`https://reddit.com/r/${random}`);
-                message.channel.send(embed)
+
     
     
-    }
-});
-        
+
+   
           
     
     
