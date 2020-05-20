@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const prefix = '*';
 const {MessageEmbed} = require('discord.js');
-const token = `NzA1OTA3NjQ2NDgxNDMyNjA4.XsGduw.GiONOVLJmEZVhaNQZfJ7kAjcd7I`;
+const token = `NzA1OTA3NjQ2NDgxNDMyNjA4.XsWbZQ.ko4gDhwJ1RYRtTiKf-exZAswkEg`;
 const r = "RANDOM";
 const bot = new Discord.Client();
 const client = new Discord.Client();
@@ -9,6 +9,7 @@ const queue = new Map();
 const api = require(`covidapi`)
 const ms = require (`parse-ms`)
 const randomPuppy = require (`random-puppy`)
+const giveMeAJoke = require (`discord-jokes`)
 
 
 
@@ -41,10 +42,10 @@ bot.on('message', message => {
         const embed = new Discord.MessageEmbed()
         .setTitle('Aperace')
         .setDescription (`**Commands**`)
-        .setThumbnail (`https://yt3.ggpht.com/a/AGF-l7-DFNiazt0LkaZXQZ-SWKm7BvooPsXjkgQtMQ=s800-c-k-c0xffffffff-no-rj-mo`)
+        .setThumbnail (`http://1.bp.blogspot.com/-zHadsvGwqEM/T48RSwyXEII/AAAAAAAAAOk/GrsTqyDwKWM/s1600/Crying-Anime-Girl-anime-girls-7642956-800-600.jpg`)
         .addField(`**Administrator**`, `**${prefix}ban <user> <reason> - Ban a user from the Server.\n${prefix}kick <user> <reason> - Kick a user from the Server.\n${prefix}clear | purge <amount of messages> - Clears a amount of messages.(Max. 100)**`)
-        .addField('**Infos**', `**${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s and Demian´s Youtube Channel.\n${prefix}server-info - Give you some Informations about the Server.**`)
-        .addField(`**Fun**`, `**${prefix}random - Shows a random number from 1 to ∞.\n More coming soon...**`)
+        .addField('**Infos**', `**${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s Youtube Channel.\n${prefix}server-info - Give you some Informations about the Server.**`)
+        .addField(`**Fun**`, `**${prefix}random - Shows a random number from 1 to ∞.\n ${prefix}joke - Tells you a joke.\n ${prefix}meme - Shows you a meme.**`)
         .setColor(0xff0000)
         .setFooter(`Created by Magg#0001`, `https://media.giphy.com/media/fGGV7FeScq2s/giphy.gif`)
         msg.channel.send(embed);
@@ -158,7 +159,7 @@ bot.on('message', message => {
         let embed = new Discord.MessageEmbed()
         .setTitle("__Server-Information__")
         .setColor("0ED4DA")
-        .setThumbnail(`https://th.bing.com/th/id/OIP._hDMcU-MRjBRaTNRuURVmAHaFj?w=224&h=168&c=7&o=5&pid=1.7`)
+        .setThumbnail(`http://1.bp.blogspot.com/-zHadsvGwqEM/T48RSwyXEII/AAAAAAAAAOk/GrsTqyDwKWM/s1600/Crying-Anime-Girl-anime-girls-7642956-800-600.jpg`)
         .addField('**Server-Name**', `**${message.guild.name}**`, true)
         .addField('**Server-Owner:**', `**${message.guild.owner.user.tag}**`, true)
         .addField("**Member-Count:**", `**${message.guild.memberCount}**`, true)
@@ -166,18 +167,59 @@ bot.on('message', message => {
       
         message.channel.send(embed);
     }
-    else if (message.content === `${prefix}user-info`) {
+    if (message.content === `${prefix}user-info`) {
 
     }
+    if (command === `joke`) {
+        giveMeAJoke.getRandomDadJoke (function(joke) {
+            message.channel.send(joke)
+        })
+    }
+    if (command === `cnjoke`) {
+        giveMeAJoke.getRandomCNJoke (function(joke) {
+            message.channel.send(joke)
+        })
+    }
+    bot.on('message', async message => {
+    if (message.content === `*meme`) {
+        const subReddits = [ "meme","dankmemer","memes"]
+        const random = subReddits[Math.floor(Math.random() * subReddits.length)];
 
-    
-    
+        const img = await randomPuppy(random);
+        const embed = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .setImage(img)
+        .setTitle(`From r/${random}`)
+        .setURL(`https://reddit.com/r/${random}`);
+        message.channel.send(embed)
+    }
 
-   
-          
-    
-    
+});
+bot.on('message', async message => {
+    if (message.content === "*covid all") {
+        api.all().then(console.log)
+
+        const data = await api.all()
+        const coronaembed = new Discord.MessageEmbed()
+        .setColor("ff2050")
+        .setTitle("Global Cases")
+        .setDescription("Number of cases may differ from other sources")
+        .addField("Cases", data.cases, true)
+        .addField("Active", data.active, true)
+        .addField("Cases Today", data.todayCases, true)
+        .addField("Critical Cases", data.critical, true)
+        .addField("Deaths", data.deaths, true)
+        .addField("Recovered", data.recovered, true)
+        message.channel.send(coronaembed)
+    }
+
 });
 
+});
     
+
+
+
+
+
 bot.login(token);

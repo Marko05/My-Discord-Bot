@@ -11,10 +11,12 @@
   "dependencies": {
     "covidapi": "^0.5.0",
     "dateformat": "^3.0.3",
+    "discord-jokes": "^1.0.12",
     "discord.js": "^12.2.0",
     "imageapi.js": "^1.0.3",
     "mongoose": "^5.9.14",
     "parse-ms": "^2.1.0",
+    "quick-db": "^1.0.5",
     "random-puppy": "^1.1.0"
   }
 }
