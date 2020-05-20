@@ -42,8 +42,9 @@ bot.on('message', message => {
         .setTitle('Aperace')
         .setDescription (`**Commands**`)
         .setThumbnail (`https://yt3.ggpht.com/a/AGF-l7-DFNiazt0LkaZXQZ-SWKm7BvooPsXjkgQtMQ=s800-c-k-c0xffffffff-no-rj-mo`)
-        .addField('**General**', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>.\n${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s and Demian´s Youtube Channel.\n${prefix}server-info - Give you some Informations about the Server.**`)
-        .addField(`**Administrator**`, `**${prefix}ban <user> <reason> - Ban a user from the Discord Server.\n${prefix}kick <user> <reason> - Kick a user from the Discord Server.\n${prefix}clear | purge <amount of messages> - Clears a amount of messages.(Max. 100)**`)
+        .addField(`**Administrator**`, `**${prefix}ban <user> <reason> - Ban a user from the Server.\n${prefix}kick <user> <reason> - Kick a user from the Server.\n${prefix}clear | purge <amount of messages> - Clears a amount of messages.(Max. 100)**`)
+        .addField('**Infos**', `**${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s and Demian´s Youtube Channel.\n${prefix}server-info - Give you some Informations about the Server.**`)
+        .addField(`**Fun**`, `**${prefix}random - Shows a random number from 1 to ∞.\n More coming soon...**`)
         .setColor(0xff0000)
         .setFooter(`Created by Magg#0001`, `https://media.giphy.com/media/fGGV7FeScq2s/giphy.gif`)
         msg.channel.send(embed);
