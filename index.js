@@ -6,6 +6,9 @@ const r = "RANDOM";
 const bot = new Discord.Client();
 const client = new Discord.Client();
 const queue = new Map();
+const api = require(`covidapi`)
+const ms = require (`parse-ms`)
+
 
 
 
@@ -34,11 +37,11 @@ bot.on('message', message => {
 
     if (command === 'help') {
         const embed = new Discord.MessageEmbed()
-        .setTitle('Renegade Bot')
+        .setTitle('Aperace')
         .setDescription (`**Commands**`)
         .setThumbnail (`https://yt3.ggpht.com/a/AGF-l7-DFNiazt0LkaZXQZ-SWKm7BvooPsXjkgQtMQ=s800-c-k-c0xffffffff-no-rj-mo`)
-        .addField('General', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>.\n${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s and Demian´s Youtube Channel.\n${prefix}server-info - Give you some Informations about the Server.**`)
-        .addField(`Administrator`, `**${prefix}ban <user> <reason> - Ban a user from the Discord Server.\n${prefix}kick <user> <reason> - Kick a user from the Discord Server.\n${prefix}clear | purge <amount of messages> - Clears a amount of messages.(Max. 100)**`)
+        .addField('**General**', `**${prefix}help - Shows this message.\n${prefix}random - Shows a random number from <Args> to <args 2>.\n${prefix}user-info - Shows your Username and your ID.\n${prefix}avatar <user> - Shows the Avatar of the user.\n${prefix}youtube - Shows Magg´s and Demian´s Youtube Channel.\n${prefix}server-info - Give you some Informations about the Server.**`)
+        .addField(`**Administrator**`, `**${prefix}ban <user> <reason> - Ban a user from the Discord Server.\n${prefix}kick <user> <reason> - Kick a user from the Discord Server.\n${prefix}clear | purge <amount of messages> - Clears a amount of messages.(Max. 100)**`)
         .setColor(0xff0000)
         .setFooter(`Created by Magg#0001`, `https://media.giphy.com/media/fGGV7FeScq2s/giphy.gif`)
         msg.channel.send(embed);
@@ -105,30 +108,26 @@ bot.on('message', message => {
             toBan.ban();
         }
     
-        else if (command === `server`) {
-            message.channel.send(`This server's name is: ${message.guild.name}`);
-    }
-           
-        
-    }
-    
-    
-         
-        
-    else if (message.content === `${prefix}user-info`) {
-        message.channel.send(`Your username: **${message.author.username}**\nYour ID: **${message.author.id}**`);
+     
     }
     else if (command === 'avatar') {
         if (!message.mentions.users.size) {
             return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`);
+        }
     
-    }
         const avatarList = message.mentions.users.map(user => {
-            return `**${user.username}'s avatar:** <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
-    });
+            return `${user.username}'s avatar: <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
+        });
+    
+        // send the entire array of strings as a message
+        // by default, discord.js will `.join()` the array with `\n`
         message.channel.send(avatarList);
     }
-    else if (command === 'fruits') {
+    
+    
+    
+    
+    if (command === 'fruits') {
         message.react('🍎');
         message.react('🍊');
         message.react('🍇');
@@ -137,11 +136,11 @@ bot.on('message', message => {
         message.react('🍍');
 
     }
-    else if (command === `youtube`) {
+    if (command === `youtube`) {
         return message.channel.send(`**Magg´s Youtube Channel:** https://www.youtube.com/channel/UCHf1Yjz6tH1Kni3jFuBWM3Q?view_as=subscriber\n**Demian´s Youtube Channel:** https://www.youtube.com/channel/UC4JLBKiDHvWbFVvKFVsO0Yg`)
         
     }
-    else if (message.content === `${prefix}server-info`) {
+    if (message.content === `${prefix}server-info`) {
         let embed = new Discord.MessageEmbed()
         .setTitle("__Server-Information__")
         .setColor("0ED4DA")
@@ -153,9 +152,13 @@ bot.on('message', message => {
       
         message.channel.send(embed);
     }
+    else if (message.content === `${prefix}user-info`) {
+    
+    } 
+
+});
 
     
-});
 
     
 bot.login(token);
