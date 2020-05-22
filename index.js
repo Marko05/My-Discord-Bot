@@ -7,6 +7,8 @@ const token = `NzA1OTA3NjQ2NDgxNDMyNjA4.XscMsg._01_MxxAfWWLtsEAjY7Hou2wAu0`;
 const randomPuppy = require (`random-puppy`)
 const giveMeAJoke = require (`discord-jokes`)
 const math = require (`mathjs`)
+
+
  
 bot.on('ready', () => {
     console.log(`${bot.user.tag} successfully logged in!`)
@@ -152,7 +154,7 @@ bot.on('message', message => {
             message.channel.send(joke)
         })
     }
-    
+
 });
 
 bot.login(token);
