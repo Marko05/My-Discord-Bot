@@ -4,6 +4,7 @@ var token = `NzA1OTA3NjQ2NDgxNDMyNjA4.XsfFgg.pvPfOQUVVf1CboPwYkdNa7a1Gug`;
 var prefix = `*`
 
 
+
 client.on('ready', async() => {
     console.log(`${client.user.tag} successfully logged in!`)
     client.user.setActivity('*help', ({type: "PLAYING"}))
