@@ -6,7 +6,7 @@ var prefix = `*`
 
 client.on('ready', async() => {
     console.log(`${client.user.tag} successfully logged in!`)
-    client.user.setActivity('commands', ({type: "PLAYING"}))
+    client.user.setActivity('*help', ({type: "PLAYING"}))
 
 });
 
