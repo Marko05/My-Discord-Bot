@@ -23,6 +23,7 @@
     "opusscript": "0.0.7",
     "parse-ms": "^2.1.0",
     "quick-db": "^1.0.5",
+    "quick.db": "^7.1.1",
     "quickdb": "^1.0.5",
     "random-puppy": "^1.1.0",
     "request-promise-native": "^1.0.8",
