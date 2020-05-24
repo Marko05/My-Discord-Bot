@@ -10,7 +10,7 @@ exports.run = async(client, msg, args) => {
     var embed = new Discord.MessageEmbed()
     .setColor("RANDOM")
     .setImage(img)
-    .setTitle(`From r/${random}`)
+    .setTitle(`From ${random}`)
     .setURL(`https://reddit.com/r/${random}`);
     msg.channel.send(embed)
 }

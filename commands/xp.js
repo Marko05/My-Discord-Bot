@@ -4,7 +4,7 @@ exports.run = async(client, msg, args) => {
 
     let score;
     if (msg.guild) {
-        score = client.getScore.get(msg.author.id, msg.guild.id);
+        score = client.getScore.(msg.author.id, msg.guild.id);
         if (!score) {
             score = {
                 id: `${msg.guild.id}-${msg.author.id}`,

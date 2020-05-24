@@ -7,5 +7,4 @@ if (serverQueue && !serverQueue.playing) {
     return msg.channel.send('▶ Resumed the music for you!');
 }
 return msg.channel.send('There is nothing playing.');
-}
-};
+

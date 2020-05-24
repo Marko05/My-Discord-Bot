@@ -13,15 +13,21 @@
     "dateformat": "^3.0.3",
     "discord-jokes": "^1.0.12",
     "discord.js": "^12.2.0",
+    "express": "^4.17.1",
+    "get-json": "^1.0.1",
     "imageapi.js": "^1.0.3",
     "mathjs": "^7.0.0",
     "moment": "^2.26.0",
     "mongoose": "^5.9.14",
     "ms": "^2.1.2",
+    "opusscript": "0.0.7",
     "parse-ms": "^2.1.0",
     "quick-db": "^1.0.5",
     "quickdb": "^1.0.5",
     "random-puppy": "^1.1.0",
+    "request-promise-native": "^1.0.8",
+    "simple-youtube-api": "^5.2.1",
+    "vultrex.db": "^1.4.1",
     "ytdl-core": "^2.1.4"
   }
 }

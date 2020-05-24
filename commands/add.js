@@ -1,5 +1,5 @@
 var Discord = require('discord.js');
-var prefix = (`*`)
+var prefix = `*`
 var yt = require('ytdl-core');
 let queue = {};
 

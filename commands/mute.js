@@ -1,58 +1,36 @@
-var Discord = require('discord.js');
-var ms = require('ms');
+const Discord = module.require('discord.js');
+const ms = require('ms');
 
-exports.run = async(client, msg, args) => {
-    if(!msg.member.hasPermission('MANAGE_MESSAGES')) return msg.reply(':x: **You can\'t use that!**');
+module.exports.run = async (bot, message, args) => {
 
-    var user = msg.mentions.users.first();
-    if(!user) return msg.reply('**Please mention someone!**');
+//console.log(args[0]);// user
+//console.log(args[1]);// role
+//console.log(args[2]);//time
 
-    var member;
+  if(message.member.hasPermission("ADMINISTRATOR")) {
+            let member2 = message.mentions.members.first();
+            if(!member2) return message.reply(":x: " + "| You need to mention a user/member!");
 
-    try {
-        member = await msg.guild.members.fetch(user);
-    } catch(err) {
-        member = null;
-    }
+            let muteRole2 = message.mentions.roles.first();
+            if(!muteRole2) return message.reply(":x: " + `| There is no such role!`);
+            
+            let time2 = args[2];
+            if(!time2) {
+              member2.addRole(muteRole2.id);
+              message.channel.send(member2 + ` you have been given the permanent role: ` + muteRole2.name);
+            }else {
+              member2.addRole(muteRole2.id);
+              message.channel.send(member2 + ` you have been given the role: ` + muteRole2.name + ` for: ${ms(ms(time2), {long: true})}`);
 
-    if(!member) return msg.reply(':x: **They aren\'t in the server!**');
-    if(member.hasPermission('MANAGE_MESSAGES')) return msg.reply(':x: **You cannot mute that person!**');
+              setTimeout(function(){
+                member2.removeRole(muteRole2.id);
+                message.channel.send(member2 + ` you role has been taken off of you your glory lasted: ${ms(ms(time2), {long: true})}`)
 
-    var rawTime = args[1];
-    var time = ms(rawTime);
-    if(!time) return msg.reply(':alarm_clock: **You didn\'t specify a time!**');
+              }, ms(time2));
 
-    var reason = args.splice(2).join(' ');
-    if(!reason) return msg.reply('**Please give a reason!**');
-
-    var channel = msg.guild.channels.cache.find(c => c.name === 'kanal-logs');
-
-    var log = new Discord.MessageEmbed()
-    .setTitle('__**Mute**__')
-    .addField('**User:**', user, true)
-    .addField('**By:**', msg.author, true)
-    .addField('**Expires:**', rawTime)
-    .addField('**Reason:**', reason)
-    msg.channel.send(log);
-
-    var embed = new Discord.MessageEmbed()
-    .setTitle('**You were muted!**')
-    .addField('**Expires:**', rawTime, true)
-    .addField('**Reason:**', reason, true);
-
-    try {
-        user.send(embed);
-    } catch(err) {
-        console.warn(err);
-    }
-
-    var role = msg.guild.roles.cache.find(r => r.name === 'Muted');
-
-    member.roles.add(role);
-
-    setTimeout(async() => {
-        member.roles.remove(role);
-    }, time);
-
-
+              };
+              }else {
+                return message.reply("You can´t use that! :x:")
+              };
 }
+
