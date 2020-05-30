@@ -9,7 +9,7 @@ const options = {
         
 }
 
-msg.channel.send("**Fetching Informtion for API**").then(msg => {
+msg.channel.send("**Fetching Information for API**").then(msg => {
     get(options).then(body => {
       
       let embed = new MessageEmbed()

@@ -5,7 +5,7 @@ var ms = require(`parse-ms`)
 exports.run = async(client, msg, args) => {
 
     let daily = await db.fetch(`daily_${msg.author.id}`);
-    let amount = 100
+    let amount = 500
     let timeout = 86400000
 
     if (daily != null && timeout - (Date.now() - daily) > 0) {
@@ -15,10 +15,10 @@ exports.run = async(client, msg, args) => {
 
     } else {
         let embed = new Discord.MessageEmbed()
-        .setAuthor(`Daily`, msg.author.displayAvatarURL)
+        .setTitle(`**Daily Rewards**`)
+        .addField(`**Collected**`, amount)
         .setColor("GREEN")
-        .setDescription(`**Daily Rewards**`)
-        .addField(`Collected`, amount)
+        
         msg.channel.send(embed)
         
         

@@ -3,6 +3,8 @@ const ms = require('ms');
 
 exports.run = async(client, msg, args) => {
 
+    
+
     if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.reply('**You can\'t use that! :x:**');
     
     if(!args[0]) return msg.channel.send(`:x: **Please specify your time!**`)
@@ -16,11 +18,15 @@ exports.run = async(client, msg, args) => {
     if(!prize) return msg.channel.send(`**Please specify a price.**`)
     msg.channel.send(`**Giveaway created in ${channel}.**`)
     
+    let time = ms(args[0])
     let Embed = new MessageEmbed()
-    .setTitle(`**🎉 GIVEAWAY 🎉**`)
-    .setDescription(`**${prize}**`)
-    .setTimestamp(Date.now()+ms(args[0]))
+    
+    .setTitle(`**🎉 NEW GIVEAWAY 🎉**`)
+    .addField(`**Prize:**`, `**${prize}**`)
+    .addField(`**Duration:**` ,`**${ms(time)}**`)
+    .setFooter(`React, to enter the giveaway!`)
     .setColor(`BLUE`)
+
     let m = await channel.send(Embed)
     m.react("🎉")
     setTimeout(() => {
@@ -32,4 +38,5 @@ exports.run = async(client, msg, args) => {
         let winner = m.reactions.cache.get("🎉").users.cache.filter(u=>!u.bot).random()
         channel.send(`The winner of the giveaway for **${prize}** is **${winner}**`)
     }, ms(args[0]));
-}
+
+}  

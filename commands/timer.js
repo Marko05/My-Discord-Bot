@@ -16,7 +16,7 @@ module.exports.run = async (bot, msg, args) => {
   msg.channel.send(":white_check_mark: " + "| Timer Started for: " + `**${ms(ms(Timer), {long: true})}**`)
 
   setTimeout(function(){
-    msg.channel.send(msg.author.toString() + ` The Timer Has **FINISHED!**, it lasted: **${ms(ms(Timer), {long: true})}**`)
+    msg.channel.send(msg.author.toString() + ` The Timer Has **FINISHED!** | Lasted: **${ms(ms(Timer), {long: true})}** | ⏱`)
 
   }, ms(Timer));
 }

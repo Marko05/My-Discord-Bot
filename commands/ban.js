@@ -1,7 +1,8 @@
 var Discord = require('discord.js');
 
 exports.run = async(client, msg, args) => {
-    if(!msg.member.hasPermission('BAN_MEMBERS')) return msg.reply(':x: **You can\'t use that!**');
+  
+    if(!msg.member.hasPermission('BAN_MEMBERS')) return msg.reply('**:x: | You can\'t use this command!**');
 
     var user = msg.mentions.users.first();
     if(!user) return msg.reply('**Please mention someone!**');
@@ -15,7 +16,8 @@ exports.run = async(client, msg, args) => {
     }
 
     if(member){
-        if(member.hasPermission('MANAGE_MESSAGES')) return msg.reply(':x: **You cannot ban this person!**');
+        
+        if(member.hasPermission('MANAGE_MESSAGES')) return msg.reply('**:x: | You cannot ban this person!**');
     }
 
     var reason = args.splice(1).join(' ');

@@ -13,7 +13,7 @@ let embed = new Discord.MessageEmbed()
 
 .setTitle(`**Bank**`)
 .setDescription(`**Your Coins:\n**${money}`)
-.setColor(0xff0000)
+.setColor("BLUE")
 .setThumbnail(avatar)
 
 msg.channel.send(embed);

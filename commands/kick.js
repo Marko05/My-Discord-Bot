@@ -1,10 +1,10 @@
 var Discord = require('discord.js');
 
 exports.run = async(client, msg, args) => {
-    if(!msg.member.hasPermission('KICK_MEMBERS')) return msg.reply(':x: **You can\'t use this command!**');
+    if(!msg.member.hasPermission('KICK_MEMBERS')) return msg.reply(':x: | **You cannot use this command!**');
 
     var user = msg.mentions.users.first();
-    if(!user) return msg.reply('**Please mention someone!**');
+    if(!user) return msg.reply('**Please mention someone to kick!**');
 
     var member;
 
@@ -14,8 +14,8 @@ exports.run = async(client, msg, args) => {
         member = null;
     }
 
-    if(!member) return msg.reply(':x: **They aren\'t in the server!**');
-    if(member.hasPermission('MANAGE_MESSAGES')) return msg.reply(':x: **You cannot kick this person!**');
+    if(!member) return msg.reply(':x: | **They are not in the server!**');
+    if(member.hasPermission('MANAGE_MESSAGES')) return msg.reply(':x: | **You cannot kick this person!**');
 
     var reason = args.splice(1).join(' ');
     if(!reason) return msg.reply('**Please give a reason!**');

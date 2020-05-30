@@ -1,25 +1,28 @@
-exports.run = async (client, message, args) => {
-    if (message.channel.id !== "713150268031631540") {
-      // If the channel it wasn't verification channel, ignore it.
-      return;
-      
+var Discord = require('discord.js');
+
+exports.run = async(client, msg, args) => {
+
+    if(msg.author.bot) return;
+    if(msg.channel.id === '714230187876941924')
+        await msg.delete();
+    if(msg.content.toLowerCase() === '*verify' && msg.channel.id === '714230187876941924')
+    {   
+        await msg.delete().catch(err => console.log(err));
+        const role = msg.guild.roles.cache.get('714507149564182538');
+        const otherole = msg.guild.roles.cache.get('714509482520215555');
+        if(role) {
+            try {
+                await msg.member.roles.add(role);
+                msg.author.send("**:white_check_mark: | Succesfully Verified. **");
+
+                await msg.member.roles.remove(otherole);
+
+            }
+            catch(err) {
+                console.log(err);
+            }
+        }
     }
-    
-    await message.delete();
-    await message.member.roles.add("713114697733505127"); // Member role.
-    
-    
-    // Use this if you want to remove the role from the user.
-    await message.member.roles.remove("ROLE_ID");
-    return;
-  }
-  
-  exports.help = {
-    name: "verify",
-    description: "Verify yourself to make sure you are not a robot."
-  }
-  
-  exports.conf = {
-    aliases: [],
-    cooldown: 20
-  }
+}
+
+

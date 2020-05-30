@@ -2,7 +2,9 @@ var Discord = require('discord.js');
 var client = new Discord.Client();
 var token = `NzA1OTA3NjQ2NDgxNDMyNjA4.XsfFgg.pvPfOQUVVf1CboPwYkdNa7a1Gug`;
 var prefix = `*`
-
+const yt = require('ytdl-core');
+const tokens = require('./tokens.json');
+let queue = {};
 
 
 client.on('ready', async() => {
@@ -28,5 +30,4 @@ client.on('message', async(msg) => {
         console.warn(err);
     }
 });
-
 client.login(token)

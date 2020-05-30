@@ -9,7 +9,7 @@ var countrydata = await api.countries({country: countrycovid})
 
 const countryembed = new Discord.MessageEmbed()
 .setColor("ff2050")
-.setTitle(`${countrycovid[1]} Cases`)
+.setTitle(`**Covid-19 Informations of ${countrycovid[1]}**`)
 .setDescription("Number of cases may differ from other sources")
 .addField("**Cases**", countrydata.cases, true)
 .addField("**Active**", countrydata.active, true)
