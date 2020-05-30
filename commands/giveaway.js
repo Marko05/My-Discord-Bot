@@ -9,7 +9,7 @@ exports.run = async(client, msg, args) => {
     
     if(!args[0]) return msg.channel.send(`:x: **Please specify your time!**`)
     if(!args[0].endsWith("d")&&!args[0].endsWith("h")&&!args[0].endsWith("m")) return msg.channel.send(`**You did not use the correct formatting for the time.**`)
-    if(isNaN(args[0][0])) return msg.channel.send(`:x: **That is not a number!**`)
+    if(isNaN(args[0][0])) return msg.channel.send(`:x: | **That is not a number!**`)
     
     let channel = msg.mentions.channels.first()
     if(!channel) return msg.channel.send(`:x: **Please select a Channel.**`)
@@ -21,9 +21,10 @@ exports.run = async(client, msg, args) => {
     let time = ms(args[0])
     let Embed = new MessageEmbed()
     
-    .setTitle(`**🎉 NEW GIVEAWAY 🎉**`)
+    .setTitle(`**🎉 GIVEAWAY 🎉**`)
     .addField(`**Prize:**`, `**${prize}**`)
     .addField(`**Duration:**` ,`**${ms(time)}**`)
+    .addField(`**Hosted By:**`, msg.author)
     .setFooter(`React, to enter the giveaway!`)
     .setColor(`BLUE`)
 
@@ -36,7 +37,7 @@ exports.run = async(client, msg, args) => {
         }
         
         let winner = m.reactions.cache.get("🎉").users.cache.filter(u=>!u.bot).random()
-        channel.send(`The winner of the giveaway for **${prize}** is **${winner}**`)
+        channel.send(`The winner of the giveaway for **${prize}** is **${winner}!**`)
     }, ms(args[0]));
 
 }  
